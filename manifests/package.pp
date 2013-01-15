@@ -68,7 +68,7 @@ class logstash::package(
   if $logstash_provider == 'http' {
     $logstash_url = "$logstash_baseurl/$logstash_jar"
 
-    package { 'curl': }
+    #package { 'curl': }
 
     # pull in the logstash jar over http
     exec { "curl -o $logstash_home/$logstash_jar $logstash_url":

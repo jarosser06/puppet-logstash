@@ -44,7 +44,7 @@ class logstash::web (
     ensure    => 'running',
     hasstatus => true,
     enable    => true,
-    require   => Logstash::Javainitscript['logstash-web'],
+    require   => [Logstash::Javainitscript['logstash-web'], User['logstash'], File['/opt/logstash/data']],
   }
 
 }
