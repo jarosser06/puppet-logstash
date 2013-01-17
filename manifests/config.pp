@@ -22,7 +22,7 @@ class logstash::config(
   $logstash_home          = '/usr/local/logstash',
   $logstash_etc           = '/etc/logstash',
   $logstash_log           = '/var/log/logstash',
-  $logstash_transport     = 'amqp',
+  $logstash_transport     = 'redis',
   $logstash_jar_provider  = 'package',
   $logstash_version       = '1.1.5',
   $logstash_verbose       = 'no',
@@ -46,26 +46,24 @@ class logstash::config(
   $group = $logstash_group
 
   # create parent directory and all folders beneath it.
-  file { $logstash_home:
-    ensure   => 'directory',
-  }
+  file {
+    "$logstash_home":
+      ensure => 'directory';
 
-  file { "${logstash_home}/bin/":
-    ensure  => 'directory',
-    require => File[$logstash_home],
-  }
-  file { "${logstash_home}/lib/":
-    ensure  => 'directory',
-    require => File[$logstash_home],
-  }
+    "${logstash_home}/bin/":
+      ensure  => 'directory',
+      require => File[$logstash_home];
 
-  file { "$logstash_etc":
-    ensure  => 'directory',
-  }
+    "${logstash_home}/lib/":
+      ensure  => 'directory',
+      require => File[$logstash_home];
 
-  file { "$logstash_log":
-    ensure   => 'directory',
-    recurse  => true,
+    "$logstash_etc":
+      ensure => 'directory';
+
+    "$logstash_log":
+      ensure  => 'directory',
+      recurse => true;
   }
 
   # make sure we have a logstash jar (& dependencies, if we want)
