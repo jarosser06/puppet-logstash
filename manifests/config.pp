@@ -37,8 +37,8 @@ class logstash::config(
   $redis_port             = '6379',
   $redis_key              = 'logstash',
   $java_provider          = 'package',
-  $java_package           = 'java-1.6.0-openjdk',
-  $java_home              = '/usr/lib/jvm/jre-1.6.0-openjdk.x86_64'
+  $java_package           = 'java-1.7.0-openjdk',
+  $java_home              = '/usr/lib/jvm/jre-1.7.0-openjdk.x86_64'
 ) {
 
   # just trying to make the fq variable a little less ridiculous

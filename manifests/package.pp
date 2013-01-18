@@ -33,7 +33,7 @@ class logstash::package(
   $logstash_provider = 'http',
   $logstash_baseurl = 'https://logstash.objects.dreamhost.com/release',
   $java_provider = 'external',
-  $java_package = 'java-1.6.0-openjdk' )
+  $java_package = 'java-1.7.0-openjdk' )
 {
 
   # naughtly, the logstash::config class creates the $logstash_home directory,
