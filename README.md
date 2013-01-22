@@ -124,7 +124,7 @@ Many of the configuration defaults come from the original behaviour of Kris Buyt
 
 
 #Credit#
-Based on lots of original work by Kris Buytaert & Joe McDonagh 
-https://github.com/KrisBuytaert/puppet-logstash
+Based on lots of original work by Kris Buytaert & Joe McDonagh <br />
+https://github.com/KrisBuytaert/puppet-logstash<br />
 https://github.com/thesilentpenguin/puppet-logstash
 
