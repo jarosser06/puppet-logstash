@@ -17,7 +17,7 @@ APP_LONG_NAME="Logstash Shipper Instance"
 
 # Wrapper
 WRAPPER_CMD="/usr/sbin/tanukiwrapper"
-WRAPPER_CONF="/usr/local/logstash/conf/shipper-wrapper.conf"
+WRAPPER_CONF="/opt/logstash/conf/shipper-wrapper.conf"
 
 # Priority at which to run the wrapper.  See "man nice" for valid priorities.
 #  nice is only used if a priority is specified.

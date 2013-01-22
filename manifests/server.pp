@@ -22,7 +22,7 @@
 #
 class logstash::server (
   $verbose = 'no',
-  $jarname ='logstash-1.1.0-monolithic.jar'
+  $jarname ='logstash-1.1.9-monolithic.jar'
 ) {
 
   file { '/etc/logstash/indexer.conf':
@@ -41,7 +41,7 @@ class logstash::server (
     source => 'puppet:///modules/logstash/logstash-server' ;
   }
 
-  file { '/usr/local/logstash/conf/server-wrapper.conf':
+  file { '/opt/logstash/conf/server-wrapper.conf':
     ensure   => 'file',
     group    => '0',
     mode     => '0644',
