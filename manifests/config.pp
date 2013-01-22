@@ -19,13 +19,13 @@
 # * Update documentation
 #
 class logstash::config(
-  $logstash_home          = '/usr/local/logstash',
+  $logstash_home          = '/opt/logstash',
   $logstash_etc           = '/etc/logstash',
   $logstash_log           = '/var/log/logstash',
   $logstash_transport     = 'redis',
   $logstash_jar_provider  = 'package',
-  $logstash_version       = '1.1.5',
-  $logstash_verbose       = 'no',
+  $logstash_version       = '1.1.9',
+  $logstash_verbose       = 'yes',
   $logstash_user          = 'logstash',
   $logstash_group         = 'logstash',
   $elasticsearch_provider = 'external',
