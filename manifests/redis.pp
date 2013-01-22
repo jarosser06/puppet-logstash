@@ -24,7 +24,7 @@
 class logstash::redis (
 ) {
 
-  # make sure the logstash::config class is declared before logstash::server
+  # make sure the logstash::config class is declared before logstash::redis
   Class['logstash::config'] -> Class['logstash::redis']
 
   if $logstash::config::redis_provider == 'package' {
@@ -64,8 +64,8 @@ class logstash::redis (
       ensure    => 'running',
       hasstatus => true,
       enable    => true,
-      subscribe => File[$redis_conf],
       require   => File[$redis_conf],
+      subscribe => [File[$redis_conf], Class['logstash::package']];
     }
   }
 }

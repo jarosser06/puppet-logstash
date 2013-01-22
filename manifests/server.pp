@@ -25,14 +25,6 @@ class logstash::server (
   $jarname ='logstash-1.1.9-monolithic.jar'
 ) {
 
-  file { '/etc/logstash/indexer.conf':
-    ensure  => 'file',
-    group   => '0',
-    mode    => '0644',
-    owner   => '0',
-    source  => 'puppet:///modules/logstash/indexer.conf';
-  }
-
   file { '/etc/rc.d/init.d/logstash-server':
     ensure => 'file',
     group  => '0',
@@ -53,6 +45,7 @@ class logstash::server (
     ensure    => 'running',
     hasstatus => true,
     enable    => true,
+    subscribe => Class['logstash::package'];
   }
 
 }
