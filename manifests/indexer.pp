@@ -35,9 +35,15 @@ class logstash::indexer (
 
   # create the config file based on the transport we are using
   # (this could also be extended to use different configs)
-  # Quick fix to allow custom config, expects a template for now 
+  # Quick fix to allow custom config, using a file 
   if $custom_config == true {
-    $indexer_conf_content = template($custom_config_location)
+    file { "${logstash::config::logstash_etc}/indexer.conf":
+      ensure  => 'file',
+      group   => '0',
+      mode    => 644,
+      owner   => '0',
+      source  => $custom_config_location,
+    }
   } else {
     
     case  $logstash::config::logstash_transport {
@@ -51,14 +57,14 @@ class logstash::indexer (
                                                     'logstash/indexer-filter.conf.erb',
                                                     'logstash/indexer-output.conf.erb') }
     }
-  }
-
-  file { "${logstash::config::logstash_etc}/indexer.conf":
-    ensure  => 'file',
-    group   => '0',
-    mode    => '0644',
-    owner   => '0',
-    content => $indexer_conf_content,
+  
+    file { "${logstash::config::logstash_etc}/indexer.conf":
+      ensure  => 'file',
+      group   => '0',
+      mode    => '0644',
+      owner   => '0',
+      content => $indexer_conf_content,
+    }
   }
 
   # startup script
