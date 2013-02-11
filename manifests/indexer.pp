@@ -19,6 +19,8 @@
 # * Update documentation
 #
 class logstash::indexer (
+  $custom_config=false,
+  $custom_config_location='',
 ) {
 
   # make sure the logstash::config class is declared before logstash::indexer
@@ -33,16 +35,22 @@ class logstash::indexer (
 
   # create the config file based on the transport we are using
   # (this could also be extended to use different configs)
-  case  $logstash::config::logstash_transport {
-    /^redis$/: { $indexer_conf_content = template('logstash/indexer-input-redis.conf.erb',
-                                                  'logstash/indexer-filter.conf.erb',
-                                                  'logstash/indexer-output.conf.erb') }
-    /^amqp$/:  { $indexer_conf_content = template('logstash/indexer-input-amqp.conf.erb',
-                                                  'logstash/indexer-filter.conf.erb',
-                                                  'logstash/indexer-output.conf.erb') }
-    default:   { $indexer_conf_content = template('logstash/indexer-input-amqp.conf.erb',
-                                                  'logstash/indexer-filter.conf.erb',
-                                                  'logstash/indexer-output.conf.erb') }
+  # Quick fix to allow custom config, expects a template for now 
+  if $custom_config == true {
+    $indexer_conf_content = template($custom_config_location)
+  } else {
+    
+    case  $logstash::config::logstash_transport {
+      /^redis$/: { $indexer_conf_content = template('logstash/indexer-input-redis.conf.erb',
+                                                    'logstash/indexer-filter.conf.erb',
+                                                    'logstash/indexer-output.conf.erb') }
+      /^amqp$/:  { $indexer_conf_content = template('logstash/indexer-input-amqp.conf.erb',
+                                                    'logstash/indexer-filter.conf.erb',
+                                                    'logstash/indexer-output.conf.erb') }
+      default:   { $indexer_conf_content = template('logstash/indexer-input-amqp.conf.erb',
+                                                    'logstash/indexer-filter.conf.erb',
+                                                    'logstash/indexer-output.conf.erb') }
+    }
   }
 
   file { "${logstash::config::logstash_etc}/indexer.conf":
